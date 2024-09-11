@@ -40,7 +40,9 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="project1.html">OpenGL Tree Generation</a></li>
+							<li><a href="project2.html">Unity Action Platformer</a></li>
+							<li><a href="project3.html">Unity Pixel Art Rendering</a></li>
 						</ul>
 					</nav>
 
@@ -49,10 +51,28 @@
 						<div class="inner">
 							<h1>Unity Pixel Art Rendering</h1>
 							<span class="image main"><img src="images/pixelrender2.png" alt="" /></span>
-							<p><span class="image left"><img src="images/pixelrenderer_day.gif" alt="" /></span>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<br><br>
-							<p><span class="image right"><img src="images/pixelrenderer_night.gif" alt="" /></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<h2>Skills used in this project</h2>
+							<ul class="alt">
+								<li>Self Learning</li>
+								<li>HLSL, Unity and Shadergraph</li>
+								<li>Shaders</li>
+							</ul>
+							<h2>Summary</h2>
+							<p><span class="image left"><img src="images/pixelrenderer_day.gif" alt="" /></span>
+							A small project I created which attempted to replicate a 2D pixel art style using Unity's 3D renderer.</p>
+							<p>To achieve the pixel appearance, the rendering camera is simply set to output a lower resolution. 
+							Screen-space Outlines and highlights were used to imitate the look of 2D sprites, the first are darker and generated from the camera's depth texture (which also has a reduced resolution).
+							The highlights are generated from the camera's depth-normal texture and highlight edges facing towards the camera in a lighter colour.
+							</p>
+							<p><span class="image right"><img src="images/pixelrenderer_night.gif" alt="" /></span>
+							A simple cel shader with 3 colour bands is used to provide a cartoony look, additionally specular is are applied separately and isn't banded.
+							The grass is made of simple billboarded sprites, their colour is determined by sampling the pixel of terrain they're on and colouring their entire sprite with it, this maintains the original silhouette of each grass tuft.</p>
+							
+							<p>The cooler night time colour palette occurs if the directional lighting reads below a certain value.
+							The water is a simple translucent shader which has its own foam outline for where it intersects with other objects also generated from the depth texture. 
+							Finally the water has planar reflections on its surface which are lightly distorted to provide the illusion of ripples.
+							</p>
+							<p>This project was mostly inspired by <a href="https://www.youtube.com/watch?v=_0PpBepvjFk">this video</a> from t3ssel8r and my goal was to replicate the style closely to challenge myself.</p>
 						</div>
 					</div>
 

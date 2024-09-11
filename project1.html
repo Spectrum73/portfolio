@@ -40,7 +40,9 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="project1.html">OpenGL Tree Generation</a></li>
+							<li><a href="project2.html">Unity Action Platformer</a></li>
+							<li><a href="project3.html">Unity Pixel Art Rendering</a></li>
 						</ul>
 					</nav>
 
@@ -49,16 +51,27 @@
 						<div class="inner">
 							<h1>OpenGL Tree Generation</h1>
 							<span class="image main"><img src="images/opengltree.png" alt="" /></span>
-							<h2>Application</h2>
-							<p><span class="image left"><img src="images/treeGUIdemo.gif" alt="" /></span>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<h2>Skills used in this project</h2>
+							<ul class="alt">
+								<li>Project Planning and Time Management</li>
+								<li>OpenGL, ImGui and C++</li>
+								<li>Research Skills</li>
+								<li>Object-Oriented Programming (OOP)</li>
+							</ul>
+							<h2>Summary</h2>
+							<p><span class="image left"><img src="images/treeGUIdemo.gif" alt="" /></span>This was the final individual project for my degree, the topic I chose being <i>"Procedural Generation of Level of Detail Meshes for Trees"</i>.
+							Within the project I had to perform detailed research and analysis on existing and potential solutions, develop my own solution based on my research and then perform in-depth analysis on its performance. Along with my application I also had to produce a 40-page research paper on the topic.
+							</p>
+							<p>The main application included a basic renderer in OpenGL, to handle the construction of the geometry I used OOP principles to design a <i>Curve</i> primitive via inheritance from bezier curve and mesh classes. I also had to design a user interface to manage the parameters for generation, which I used the Dear ImGui library for.</p>
+							<p>LOD variants were constructed from the same base tree instance, with the mesh quality reduction coming from altering the detail of each curve primitive by an amount decided by various algorithms per branch.</p>
 							<h2>Benchmarking</h2>
 							<div class="row gtr-uniform">
 								<div class="col-4"><span class="image fit"><img src="images/treeBenchmark.png" alt="" /></span></div>
 								<div class="col-4"><span class="image fit"><img src="images/treeBenchmarkAnalysis.png" alt="" /></span></div>
 								<div class="col-4"><span class="image fit"><img src="images/treeBenchmarkResults.png" alt="" /></span></div>
 							</div>
+							<p>Performance was measured in two ways: one using a demo scene in the unity engine using LOD groups and the other by measuring generation and rendering times of individual trees in the OpenGL application.</p>
+							<p>The Unity benchmarking application featured hundreds of instances for each case and had a camera fly along a set path at varying speeds, profiling data from the GPU was exported in the .csv format, from which graphs were produced in a Python notebook.</p>
 						</div>
 					</div>
 
