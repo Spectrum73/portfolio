@@ -70,19 +70,61 @@
 							<p>Combat uses traditional fighting game combo principles, featuring cancels, specials and other systems such as an action buffer is used to improve responsiveness.
 							Most systems were implemented from scratch so that I could learn how they should work in more detail whilst making them.
 							</p>
-							<p>Attacks for the combat system use a modular approach, being constructed from multiple smaller actions playing at set times throughout the attack, some of these actions include: Activating a hitbox, playing VFX or changing the actor's velocity.
-							Similarly, hitboxes are also modular, instances can easily have their hit data adjusted, including the number and placement of hitboxes.
-							</p>
 							<center><video width="854" height="480" controls>
 								<source src="images/combat_demo.mp4" type="video/mp4">
 							</video></center>
+							<br>
+							<div class="row aln-left">
+								<div class="col-3"><span class="image fit"><img src="images/attack_data_SO.png" alt="" /></span></div>
+							<div class="col-3"><span class="image fit"><img src="images/hitbox_SO.png" alt="" /></span></div>
+								<div class="col-5">
+									<p>
+									Attacks for the combat system use a modular approach, being constructed from multiple smaller actions playing at set times throughout the attack, some of these actions include: Activating a hitbox, playing VFX or changing the actor's velocity.
+									</p>
+									<p>
+										Similarly, hitboxes are also modular, instances can easily have their hit data adjusted, including the number and placement of hitboxes.
+									</p>
+								</div>
+								<br>
+								</p>
+							</div>
+							<div>
+								<p><span class="image right"><img src="images/checkhitbox.png" alt="" /></span>
+									Due to ScriptableObjects not being MonoBehaviours it is less suitable to check their hits using colliders or triggers.
+									Instead, Physics.OverlapSphereNonAlloc is used which doesn't generate any garbage, this is especially important as it is likely to be called frequently.
+									<br><br>
+									Interfaces are used for hit and hurt responders so objects can decide how they should react and validate hits.
+								</p>
+								<br><br><br><br><br><br>
+							</div>
 							<p></p>
+							<h3>Other</h3>
+							<p>
+								<span class="image right"><img src="images/condition_base.png" alt="" />
+								<img src="images/evaluate_intersection.png" alt="" /></span>
+								Most systems are made modular for reusability, usually via dependency injection with interfaces. 
+								An example for this is the Conditions system which allows specific conditions to be evaluated.
+								<br><br>
+								Any class wanting to use conditions only needs to reference either the Condition class for a single condition or create its own ConditionEvaluator which will handle multiple conditions for it.
+								Conditions also support events for when they become true or false to help avoid the need to poll them.
+								<br><br>
+								By using these, complex condition classes can exist without the script referencing requiring to know anything other than the base class.
+								Two examples are buttons, which merely evaluate when they're pressed or not, and an EnemyGroup, which evaluates itself each time one of its registered enemies dies.
+							</p>
 						</div>
 					</div>
 
 				<!-- Footer -->
 				<footer id="footer">
 					<div class="inner">
+						<section>
+							<h2>Contact</h2>
+							<ul class="icons">
+								<li><a href="https://github.com/Spectrum73" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="mailto: corinbeckwith@gmail.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								<li><a href="https://www.linkedin.com/in/corin-beckwith-b2b0a7327/" class="icon solid style2 fa-file"><span class="label"></span></a></li>
+							</ul>
+						</section>
 						<ul class="copyright">
 							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 						</ul>
