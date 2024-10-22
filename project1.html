@@ -58,13 +58,18 @@
 								<li>Research Skills</li>
 								<li>Object-Oriented Programming (OOP)</li>
 							</ul>
+							What problem(s) did you set out to solve? What difficulties did you run into? How did you solve those? What did you learn that feels useful to you?
 							<h2>Summary</h2>
 							<h4><a href="https://github.com/Spectrum73/procedural-plant-mesh-generation">Application Repository</a></h4>
 							<p><span class="image left"><img src="images/treeGUIdemo.gif" alt="" /></span>This was the final individual project for my degree, the topic I chose being <i>"Procedural Generation of Level of Detail Meshes for Trees"</i>.
+							The goal of the project was to develop an application capable of generating procedural tree meshes based on a set of input parameters and to also automatically create lower detail meshes of the same tree.
 							Within the project I had to perform detailed research and analysis on existing and potential solutions, develop my own solution based on my research and then perform in-depth analysis on its performance. Along with my application I also had to produce a 40-page research paper on the topic.
 							</p>
 							<p>The main application included a basic renderer in OpenGL, to handle the construction of the geometry I used OOP principles to design a <i>Curve</i> primitive via inheritance from bezier curve and mesh classes. I also had to design a user interface to manage the parameters for generation, which I used the Dear ImGui library for.</p>
 							<p>LOD variants were constructed from the same base tree instance, with the mesh quality reduction coming from altering the detail of each curve primitive by an amount decided by various algorithms per branch.</p>
+							<p>A problem I ran into was intersecting faces between branches and the main trunk, I knew I wanted to solve the issue with boolean operations but didn't have the time to implement my own and so opted to use the <a href="https://github.com/cutdigital/mcut">mcut</a> library.
+							This required me to convert my mesh formatting for usage with the library where I'd convert them back afterwards. Due to cutting sometimes providing messy topology I still provided an option to keep intersecting faces.</p>
+							
 							<h2>Benchmarking</h2>
 							<h4><a href="https://github.com/Spectrum73/final-project-benchmark">Benchmarking Repository</a></h4>
 							<div class="row gtr-uniform">
@@ -74,6 +79,15 @@
 							</div>
 							<p>Performance was measured in two ways: one using a demo scene in the unity engine using LOD groups and the other by measuring generation and rendering times of individual trees in the OpenGL application.</p>
 							<p>The Unity benchmarking application featured hundreds of instances for each case and had a camera fly along a set path at varying speeds, profiling data from the GPU was exported in the .csv format, from which graphs were produced in a Python notebook.</p>
+						
+							<h2>Conclusion</h2>
+							<p>
+								This project provided valuable experience for managing a large scale project, researching skills and time management.
+								Time management was a large factor in the project as I was required to juggle writing a full paper and developing a working product, so I chose to use a development timeline.
+								For this, I created a Gantt chart to use my time efficiently by allocating required tasks the time they'd need.
+								When researching I had to not only think about how I would approach the issue, but what similar solutions already existed.
+								I learnt from websites, papers and many other sources that I cited and discussed in my paper, all of which culminated in my final solution.
+							</p>
 						</div>
 					</div>
 
