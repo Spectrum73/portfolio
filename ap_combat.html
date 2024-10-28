@@ -52,11 +52,72 @@
 							<a href="project2.html#devinfo" class="button primary">Back</a>
 							<hr />
 							<h1>Combat</h1>
-							<p><b>This page is still a work in progress.</b></p>
-							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p><span class="image left"><img src="images/pic14.jpg" alt="" /></span>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<span class="image main"><img src="images/ap_combat_banner.png" alt="" /></span>
+							<p>
+								The combat system consists of a few core scripts:
+								<ul>
+									<li><b>IHurtResponder</b> - An interface which allows an entity with a hurtbox to be hit.</li>
+									<li><b>IHitResponder</b> - An interface which triggers when an attack from its owner entity hits something.</li>
+									<li><b>AttackStateManager</b> - Handles state and combat data for actor attacking.</li>
+									<li><b>HitboxManager</b> - Allows actors to create hitboxes.</li>
+								</ul>
+							</p>
+
+							<hr/>
+							<h2>Hitboxes</h2>
+							<p>
+								An issue I ran into on early hitbox iterations was the time taken to set up each hitbox gameobject and tie them to the animator, enabling and disabling them every time.
+								Because of this I decided to design my own hitbox system, independent of animation and one where hitboxes wouldn't have to be initialised in the scene.
+							</p>
+							<p>
+								<span class="image right"><img src="images/hitbox_SO.png" /></span>
+								Hitboxes have their data stored as <a href="https://docs.unity3d.com/Manual/class-ScriptableObject.html">Scriptable Objects</a>, by storing data this way actors can utilise them no matter the scene they're in as they don't have to reference a GameObject or Monobehaviour instance.
+								This saves having to create Hitbox Gameobjects for each required hitbox for each actor, instead they're simply drag and drop where any attack on any actor can be assigned any hitboxes.
+							</p>
+							<p>
+								A Hitbox consists of various properties such as damage, hitstun, audio data, knockback direction, and other data. The most important part is its radius and position which determine how hits with it are checked.
+								When a HitboxManager invokes CheckHitbox() it's passed a hitbox data, it then performs a Physics.OverlapSphereNonAlloc() check to get all valid hurtboxes within the hitboxes area.
+								The position used for this check is converted from local space to world space as well, this allows hitboxes to follow their respective actors.
+							</p>
+							<p>
+								The manager then iterates over all the hurtboxes and validates each hit, creating hitdata to pass to the attackmanager and hit recipient.
+								Other parameters that can alter hitboxes include: Masks to check for Player, Enemy or Ally hitboxes and the frame duration for which the hitbox should linger.
+								If the latter is used, the hitbox checks itself each FrameUpdate() for the desired duration, a frame update is tied to the frame manager which simply triggers its update event every 1/60th to achieve a constant update independent of frame rate (Plenty of fighting games lock the frame rate to 60 but due to this being an action game I chose this approach instead).
+							</p>
+
+							<hr/>
+							<h2>Attack Data</h2>
+							<p>
+								<span class="image right small"><img src="images/attack_data_SO.png" /></span>
+								Attacks are what activate hitboxes. An attack is also a scriptable object and consists of data such as:
+								<ul>
+									<li>Animation name</li>
+									<li>Frame duration</li>
+									<li>Sound effects</li>
+									<li>Particle effects</li>
+									<li>Effect Casters</li>
+								</ul>
+							</p>
+							<h3>Effect Casters</h3>
+							<p>
+								These are the bread and butter of attacks. An effect caster is a type of action which can be triggered on a specific frame of an attack.
+								Examples of what they can do include:
+								<ul>
+									<li>Enable a hitbox for <b>n</b> frames</li>
+									<li>Display Particles/VFX</li>
+									<li>Set the actor velocity</li>
+									<li>And much more</li>
+								</ul>
+								The AttackStateManager iterates through each effect caster on every frame of an attack and triggers the corresponding effects, if an attack is interrupted then the rest of the effects won't play.
+							</p>
+
+							<hr/>
+							<div class="box alt">
+								<div class="row gtr-uniform">
+									<div class="col-6"><span class="image fit"><figure><img src="images/ap_hitbox_preview.png" alt="" /><figcaption>An attack with hitboxes visible</figcaption></figure></span></div>
+									<div class="col-6"><span class="image fit"><figure><img src="images/ap_hitbox_preview_nohitbox.png" alt="" /><figcaption>The same attack from how it normally appears.</figcaption></figure></span></div>
+								</div>
+							</div>
 						</div>
 					</div>
 

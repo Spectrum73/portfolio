@@ -2349,6 +2349,10 @@ input, select, textarea {
 			width: 50%;
 		}
 
+		.image.small {
+			width: 25%;
+		}
+
 		.image.fit {
 			display: block;
 			margin: 0 0 2em 0;
@@ -3334,3 +3338,14 @@ input, select, textarea {
 			}
 
 		}
+
+figure {
+	display: inline-block;
+	margin: 20px; /* adjust as needed */
+}
+figure img {
+	vertical-align: top;
+}
+figure figcaption {
+	text-align: center;
+}

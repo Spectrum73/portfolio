@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Action Platformer - VFX</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<header id="header">
+					<div class="inner">
+
+						<!-- Logo -->
+							<a href="index.html" class="logo">
+								<span class="title">Corin Beckwith</span>
+							</a>
+
+						<!-- Nav -->
+							<nav>
+								<ul>
+									<li><a href="#menu">Menu</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="project1.html">OpenGL Tree Generation</a></li>
+							<li><a href="project2.html">Unity Action Platformer</a></li>
+							<li><a href="project3.html">Unity Pixel Art Rendering</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<a href="project2.html#devinfo" class="button primary">Back</a>
+							<hr />
+							<h1>Visual Effects</h1>
+							<span class="image main"><img src="images/ap_vfx_banner.png" alt="" /></span>
+
+							<h2>Summary</h2>
+							<p>
+								For this project I've utilised both Unity's particle system and VFX graph as I often find particles easier to prototype with and VFX graphs better for managing complicated effects.
+								An issue I often came across was reusing VFX, lots of actors shared them and having to set up individual instances for each felt ineffective.
+							</p>
+							<p>
+								To solve this I designed a system where various VFX and particles can be requested to play with varying parameters from a manager singleton.
+								The first important duty of this manager is VFX pooling, to reuse instances where possible. This is handled rather simply where the library of available effects (a prefab tied to an enum value) are assigned in the manager, then whilst running, if an effect is requested it will then be instanced if none are available, but if one is available it will reuse it instead.
+								The largest hurdle for this is determining when a VFX graph is finished playing, as this data isn't readily available on the CPU, my solution was to set a duration inside the library which will set a timer for each pooled effect when they play, then the manager can read that timer and determine whether the effect is free or not.
+							</p>
+
+							<hr/>
+							<h2>Effect Requests</h2>
+							<p>
+								Effect requests are a struct which can be passed when requesting a visual effect to be played, they contain many parameters such as: 
+								<ul>
+									<li>World or Local position</li>
+									<li>A parent gameobject for the visual effect</li>
+									<li>Colour, speed, size, etc of the visual effect</li>
+								</ul>
+								For the last few, these require visual effects to have exposed parameters with consistent naming conventions for any of these they wish to utilise.
+								This system allows Effect Casters from attacks to simply pass one of this struct rather than managing many different variables.
+							</p>
+
+							<hr/>
+							<h2>Visual Effect Creation</h2>
+							<p>
+								Most visual effects either use particle systems of visual effect graphs but in actuality they can be anything attached to a gameobject prefab.
+								An example is the basic slash VFX which creates 3 simple meshes to form a "sandwich", where the outer layers are the requested colour and the inside is black to form an outline.
+								To make the slash appear a shader is used made in Unity's shadergraph. This shader simply scrolls a voronoi noise based over time and uses alpha clipping to create the holes in the slash.
+								The UVs of the slash mesh are aligned specifically for the effect by aligning the mesh quads.
+							</p>
+							<hr/>
+
+							<div class="box alt">
+								<div class="row gtr-uniform">
+									<div class="col-6"><span class="image fit"><figure><img src="images/ap_slash_vfx.gif" alt="" /><figcaption>Slash Visual Effect</figcaption></figure></span></div>
+									<div class="col-6"><span class="image fit"><figure><img src="images/ap_special_vfx.gif" alt="" /><figcaption>Special Attack Visual Effect</figcaption></figure></span></div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<div class="inner">
+						<section>
+							<h2>Contact</h2>
+							<ul class="icons">
+								<li><a href="https://github.com/Spectrum73" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="mailto: corinbeckwith@gmail.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								<li><a href="https://www.linkedin.com/in/corin-beckwith-b2b0a7327/" class="icon solid style2 fa-file"><span class="label"></span></a></li>
+							</ul>
+						</section>
+						<ul class="copyright">
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

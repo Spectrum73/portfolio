@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Action Platformer - Grappling</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<header id="header">
+					<div class="inner">
+
+						<!-- Logo -->
+							<a href="index.html" class="logo">
+								<span class="title">Corin Beckwith</span>
+							</a>
+
+						<!-- Nav -->
+							<nav>
+								<ul>
+									<li><a href="#menu">Menu</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="project1.html">OpenGL Tree Generation</a></li>
+							<li><a href="project2.html">Unity Action Platformer</a></li>
+							<li><a href="project3.html">Unity Pixel Art Rendering</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<a href="project2.html#devinfo" class="button primary">Back</a>
+							<hr />
+							<h1>Grappling</h1>
+							<span class="image main"><img src="images/ap_grappling_banner.png" alt="" /></span>
+
+							<p>
+								There are two types of grappling mechanic, zipping and swinging. The first allows the player to directly move towards a point or enemy, the latter allows the player to swing around the grappled point instead.
+
+							</p>
+							<hr/>
+							<h2>Swinging</h2>
+							<p>
+								I prototyped a few methods for swinging originally, one using Unity's built in joints system when I used an older version of the character controller.
+								Eventually I found <a href="https://code.tutsplus.com/swinging-physics-for-player-movement-as-seen-in-spider-man-2-and-energy-hook--gamedev-8782t">this article</a> detailing how swinging mechanics can be implemented by constraining the character's movement within a sphere, and so I decided to try my own take on this.
+							</p>
+							<p>
+								The first hurdle was that I wished for grappling to be an extension to the player controller contained within its own script, but the player controller required velocity to be altered in a specific method to keep physics consistent.
+								My solution was to implement an IAdditionalVelocityCalculation interface which could be added to the controller and calculated within the correct update.
+							</p>
+							<p>
+								The swinging itself is fairly simple, it constrains the controller's transient position within the radius of the grappled point and velocity is adjusted to only take the perpendicular component.
+								Even with this the player would still keep crashing into the ground so I implemented ground clearance, which automatically adjusts the rope length to try and keep the player above the ground.
+								This uses a raycast on the player's position and will shorten the rope if it meets the correct threshold, the speed at which the rope adjusts can also be changed to prevent the player instantly gaining lots of speed.
+							</p>
+							<figure class = "image">
+								<img src="images/ap_grapple_swing.gif" class = "image center">
+								<figcaption>The player swinging around</figcaption>
+							</figure>
+							<hr/>
+							<h2>Zipping</h2>
+							<p>
+								Zipping also uses an interface called IZippable, this is extended by IEntity and is also used by the Zippable Monobehaviour for standard GameObjects.
+								When the player grapples a point, it is checked whether it has an IZippable component, otherwise it will swing instead, if it does zip the player moves in a straight line towards it.
+								Certain zippables can be Latched, where the player grabs hold mid-air, this simply just causes the player to transition to a Latch state which gets passed the current IZippable.
+								Both zipping and swinging also use their own states to manage player constraints and animations, these are assigned by the grapple script to the ActorStateManager to keep it self contained.
+							</p>
+							<figure class = "image">
+								<img src="images/ap_grapple_zip.gif" class = "image center">
+								<figcaption>The player zipping</figcaption>
+							</figure>
+						</div>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<div class="inner">
+						<section>
+							<h2>Contact</h2>
+							<ul class="icons">
+								<li><a href="https://github.com/Spectrum73" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="mailto: corinbeckwith@gmail.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								<li><a href="https://www.linkedin.com/in/corin-beckwith-b2b0a7327/" class="icon solid style2 fa-file"><span class="label"></span></a></li>
+							</ul>
+						</section>
+						<ul class="copyright">
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

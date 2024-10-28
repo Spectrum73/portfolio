@@ -52,11 +52,35 @@
 							<a href="project2.html#devinfo" class="button primary">Back</a>
 							<hr />
 							<h1>User Interface</h1>
-							<p><b>This page is still a work in progress.</b></p>
-							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p><span class="image left"><img src="images/pic14.jpg" alt="" /></span>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<span class="image main"><img src="images/ap_ui_banner.png" alt="" /></span>
+
+							<h2>Menu</h2>
+							<p>
+								My goal was to design menus which could be set up easily and have a variety of transitions play on certain actions, without the need to animate through the use of <a href="https://dotween.demigiant.com/documentation.php">Tweens</a>.
+								I set this up by creating a transition class which can be placed on any gameobject to trigger a tween to be played, the tween is highly adjustable through its parameters, allowing various movements, scalings and easings to be used.
+								On certain menu actions these transitions can then be played, such as switching sub-menu type.
+							</p>
+							<p>
+								The buttons also use their own class to display their animations through tweens in a similar manner.
+							</p>
+							<figure class = "image">
+								<img src="images/ap_ui_menu.gif" class = "image center">
+								<figcaption>The prototype pause menu</figcaption>
+							</figure>
+
+							<hr/>
+							<h2>Player HUD</h2>
+							<p>
+								Most of the UI is still in very early stages so currently the player only has 2 indicators, a health bar and a grapple charge display.
+								The health bar script simply subscribes to the current actor being controlled, read via the ActorManager, it then listens to the actor's OnHealthChange event and will play the corresponding tweens for the damage or healing effects.
+								The grapple charge pips are similar but instead attempt to get the grapple hook script from the actor, otherwise they'll disable.
+							</p>
+							<figure class = "image center">
+								<img src="images/ap_ui_hud.gif" class = "image center">
+								<figcaption>The health bar and grapple charge pips</figcaption>
+							</figure>
+
+							<hr/>
 						</div>
 					</div>
 
